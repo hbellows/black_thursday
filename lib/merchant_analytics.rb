@@ -43,27 +43,21 @@ module MerchantAnalytics
   end
 
   def find_top_merchants_by_invoice_count
-    top_merchants = []
     bar = two_standard_deviations_above(invoices_per_merchant.values)
-    invoices_per_merchant.each do |merchant_id, invoice|
+    invoices_per_merchant.find_all do |merchant_id, invoice|
       if invoice > bar
-        merchant = @se.merchants.find_by_id(merchant_id)
-        top_merchants << merchant
+        @se.merchants.find_by_id(merchant_id)
       end
     end
-    top_merchants
   end
 
   def find_bottom_merchants_by_invoice_count
-    bottom_merchants = []
     bar = two_standard_deviations_below(invoices_per_merchant.values)
-    invoices_per_merchant.each do |merchant_id, invoice|
+    invoices_per_merchant.find_all do |merchant_id, invoice|
       if invoice < bar
-        merchant = @se.merchants.find_by_id(merchant_id)
-        bottom_merchants << merchant
+        @se.merchants.find_by_id(merchant_id)
       end
     end
-    bottom_merchants.compact
   end
 
   def group_by_day_of_the_week
@@ -74,15 +68,13 @@ module MerchantAnalytics
   end
 
   def find_top_days_by_invoice_count
-    top_days = []
     values = group_by_day_of_the_week.values
     bar = (average(values) + standard_deviation(values)).round
-    group_by_day_of_the_week.each do |day, count|
+    group_by_day_of_the_week.select do |day, count|
       if count > bar
-        top_days << day
+        day
       end
-    end
-    top_days
+    end.keys
   end
 
   def find_invoice_status(status)
