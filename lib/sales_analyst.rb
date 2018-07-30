@@ -208,7 +208,17 @@ class SalesAnalyst
     find_total_revenue_by_date(date)
   end
 
+  def top_revenue_earners(top_earners = 20)
+    find_top_revenue_earners(top_earners)
+  end
 
+  def merchants_ranked_by_revenue
+    find_merchants_ranked_by_revenue
+  end
+
+  def revenue_by_merchant(merchant_id)
+    merchants_by_revenue[merchant_id]
+  end
 
 
 end
