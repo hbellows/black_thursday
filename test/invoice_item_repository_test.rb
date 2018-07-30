@@ -75,6 +75,7 @@ class InvoiceItemRepositoryTest < Minitest::Test
     assert_equal 10, @invoice_item_repo.all[-1].id
     assert_equal 10, @invoice_item_repo.all[-1].invoice_id
     assert_equal 5, @invoice_item_repo.all[-1].quantity
+    assert_equal 12.99, @invoice_item_repo.all[-1].unit_price
   end
 
   def test_it_can_update_all_invoice_attributes

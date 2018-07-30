@@ -35,6 +35,7 @@ module MerchantAnalytics
   end
 
   def invoice_items_by_invoice_date(date)
+    # require "pry"; binding.pry
     invoices_by_date[date].each_with_object([]) do |invoice, dates|
       dates << invoice.id
       dates
@@ -90,32 +91,32 @@ module MerchantAnalytics
     ((by_status / invoices.to_f) * 100).round(2)
   end
 
-  def invoice_paid_in_full?(invoice_id)
-    return false if @transactions_by_invoice[invoice_id].nil?
-    @transactions_by_invoice[invoice_id].any? do |transaction|
-      transaction.result == :success
-    end
-  end
-
-  def invoice_total(invoice_id)
-    return nil unless invoice_paid_in_full?(invoice_id)
-    invoice_by_id = group_invoice_items_by_invoice_id
-    total_price = invoice_by_id[invoice_id].inject(0) do |collector, invoice|
-      collector + (invoice.quantity * invoice.unit_price)
-    end
-    BigDecimal(total_price, 5)
-  end
-
-  def merchants_with_pending_invoices
-    @invoices_by_merchant.each_with_object([]) do |(id, invoices), collector|
-      invoices.each do |invoice|
-        unless invoice_paid_in_full?(invoice.id)
-          collector << @sales_engine.merchants.find_by_id(id)
-        end
-      end
-      collector
-    end.uniq
-  end
+  # def invoice_paid_in_full?(invoice_id)
+  #   return false if @transactions_by_invoice[invoice_id].nil?
+  #   @transactions_by_invoice[invoice_id].any? do |transaction|
+  #     transaction.result == :success
+  #   end
+  # end
+  #
+  # def invoice_total(invoice_id)
+  #   return nil unless invoice_paid_in_full?(invoice_id)
+  #   invoice_by_id = group_invoice_items_by_invoice_id
+  #   total_price = invoice_by_id[invoice_id].inject(0) do |collector, invoice|
+  #     collector + (invoice.quantity * invoice.unit_price)
+  #   end
+  #   BigDecimal(total_price, 5)
+  # end
+  #
+  # def merchants_with_pending_invoices
+  #   invoices_by_merchant.each_with_object([]) do |(id, invoices), collector|
+  #     invoices.each do |invoice|
+  #       unless invoice_paid_in_full?(invoice.id)
+  #         collector << @sales_engine.merchants.find_by_id(id)
+  #       end
+  #     end
+  #     collector
+  #   end.uniq
+  # end
 
   def find_total_revenue_by_date(date)
     invoices_by_date = invoice_items_by_invoice_date(date)
@@ -147,7 +148,7 @@ module MerchantAnalytics
   end
 
   def merchants_by_revenue
-    @invoices_by_merchant.each_with_object({}) do |(id, invoices), revenue|
+    invoices_by_merchant.each_with_object({}) do |(id, invoices), revenue|
       revenue[id] = invoices.inject(0) do |sum, invoice|
         if invoice_paid_in_full?(invoice.id)
           sum += invoice_total(invoice.id)
