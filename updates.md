@@ -1,17 +1,15 @@
 bundle exec rspec spec/iteration_2_spec.rb
-Completed Iterations: 0, 1, 2
+Completed Iterations: 0, 1, 2, 3
 
-Iteration 4
+Iteration 4 in progress
 Finished:
+*sales_analyst.total_revenue_by_date(date) #=> $$
 
 Work in Progress/Updates:
+*sales_analyst.top_revenue_earners(x) #=> [merchant, merchant, merchant, merchant, merchant]
 
 Pending:
-
 Iteration 4: Merchant Analytics
-*sales_analyst = sales_engine.analyst
-*sales_analyst.total_revenue_by_date(date) #=> $$
-*sales_analyst.top_revenue_earners(x) #=> [merchant, merchant, merchant, merchant, merchant]
 *sales_analyst.top_revenue_earners #=> [merchant * 20]
 *sales_analyst.merchants_with_pending_invoices #=> [merchant, merchant, merchant]
 *sales_analyst.merchants_with_only_one_item #=> [merchant, merchant, merchant]
