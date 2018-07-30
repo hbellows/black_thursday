@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './test/test_helper'
 require './lib/invoice_repository'
 require './lib/invoice'
@@ -11,25 +12,25 @@ class InvoiceRepositoryTest < Minitest::Test
       {:id         => 1,
       :customer_id => 7,
       :merchant_id => 8,
-      :status      => "pending",
+      :status      => 'pending',
       :created_at  => Time.now,
       :updated_at  => Time.now},
       {:id         => 2,
       :customer_id => 7,
       :merchant_id => 10,
-      :status      => "shipped",
+      :status      => 'shipped',
       :created_at  => Time.now,
       :updated_at  => Time.now},
       {:id         => 3,
       :customer_id => 11,
       :merchant_id => 12,
-      :status      => "returned",
+      :status      => 'returned',
       :created_at  => Time.now,
       :updated_at  => Time.now},
       {:id         => 4,
       :customer_id => 13,
       :merchant_id => 12,
-      :status      => "pending",
+      :status      => 'pending',
       :created_at  => Time.now,
       :updated_at  => Time.now}]
 
@@ -68,7 +69,7 @@ class InvoiceRepositoryTest < Minitest::Test
     @invoice_repo.create({
     :customer_id => 13,
     :merchant_id => 12,
-    :status      => "pending",
+    :status      => 'pending',
     :created_at  => Time.now,
     :updated_at  => Time.now})
 
@@ -77,9 +78,9 @@ class InvoiceRepositoryTest < Minitest::Test
   end
 
   def test_it_can_update_an_invoice
-    @invoice_repo.update(1, {:status => "shipped"})
+    @invoice_repo.update(1, {:status => 'shipped'})
 
-    assert_equal "shipped", @invoice_repo.all[0].status
+    assert_equal 'shipped', @invoice_repo.all[0].status
   end
 
   def test_it_can_delete_an_invoice
@@ -88,5 +89,4 @@ class InvoiceRepositoryTest < Minitest::Test
     assert_equal 3, @invoice_repo.all.count
     assert_equal 3, @invoice_repo.all[-1].id
   end
-
 end

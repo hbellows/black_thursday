@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './test/test_helper'
 require './lib/invoice'
 
@@ -8,7 +9,7 @@ class InvoiceTest < Minitest::Test
       :id          => 6,
       :customer_id => 7,
       :merchant_id => 8,
-      :status      => "pending",
+      :status      => 'pending',
       :created_at  => Time.now,
       :updated_at  => Time.now,
     })

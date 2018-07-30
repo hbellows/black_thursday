@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'bigdecimal'
 require 'bigdecimal/util'
 require_relative 'standard_deviation'
@@ -130,9 +131,7 @@ class SalesAnalyst
     end
     return golden_items
   end
-
-#----------------ITERATION TWO---------------------------------
-
+  #----------------ITERATION TWO---------------------------------
   def average_invoices_per_merchant
     (@se.invoices.all.count / @se.merchants.all.count.to_f).round(2)
   end
@@ -156,8 +155,7 @@ class SalesAnalyst
   def invoice_status(status)
     find_invoice_status(status)
    end
-
-#-------------------ITERATION THREE------------------------------------
+  #-------------------ITERATION THREE------------------------------------
   def find_invoice(invoice_id)
     selected = []
     @se.invoices.all.each do |invoice|
@@ -202,8 +200,7 @@ class SalesAnalyst
    end
    BigDecimal(sum, 7)
  end
-
-#----------------------ITERATION FOUR----------------------------------
+ #----------------------ITERATION FOUR----------------------------------
   def total_revenue_by_date(date)
     find_total_revenue_by_date(date)
   end
@@ -219,6 +216,4 @@ class SalesAnalyst
   def revenue_by_merchant(merchant_id)
     merchants_by_revenue[merchant_id]
   end
-
-
 end

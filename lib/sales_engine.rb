@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'file_loader'
 require_relative 'merchant_repository'
 require_relative 'item_repository'

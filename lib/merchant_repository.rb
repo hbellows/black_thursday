@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'merchant'
 require_relative 'repository_assistant'
 require 'time'
@@ -6,7 +7,7 @@ class MerchantRepository
   include RepositoryAssistant
 
   def initialize(data_file)
-    @repository = data_file.map {|merchant| Merchant.new(merchant)}
+    @repository = data_file.map { |merchant| Merchant.new(merchant) }
   end
 
   def find_all_by_name(name)
