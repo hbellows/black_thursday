@@ -143,7 +143,19 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_calculate_top_revenue_earners
-    # skip
-    assert_equal [], @sa.top_revenue_earners(10)
+    expected = @sa.top_revenue_earners
+    assert_equal 4, expected.count
+    assert_equal 12334113, expected[0].id
+  end
+
+  def test_it_can_sort_revenue_by_merchant
+    assert_equal 87036.01, @sa.revenue_by_merchant(12334113).to_f
+  end
+
+  def test_it_can_rank_merchants_by_revenue
+    expected = @sa.merchants_ranked_by_revenue
+    assert_equal 4, expected.count
+    assert_equal 12334113, expected[0].id
+    assert_equal 12335938, expected[3].id
   end
 end
