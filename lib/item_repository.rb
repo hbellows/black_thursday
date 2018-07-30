@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'item'
 require_relative 'repository_assistant'
 
@@ -5,7 +6,7 @@ class ItemRepository
   include RepositoryAssistant
 
   def initialize(data_file)
-    @repository = data_file.map {|item| Item.new(item)}
+    @repository = data_file.map { |item| Item.new(item) }
   end
 
   def find_all_with_description(description)

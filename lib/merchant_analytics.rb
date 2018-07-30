@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module MerchantAnalytics
 
   def items_by_merchant
@@ -82,7 +83,7 @@ module MerchantAnalytics
     by_status = @se.invoices.find_all_by_status(status).count
     ((by_status / invoices.to_f) * 100).round(2)
   end
-#--------------------Iteration 4 Merchant Analytics--------------------------
+  #--------------------Iteration 4 Merchant Analytics------------------------
   #ibd = invoice items by date; not the same as the method invoices_items_by_invoice_date
   def find_total_revenue_by_date(date)
     iibd = invoice_items_by_invoice_date(date)
@@ -129,5 +130,4 @@ module MerchantAnalytics
       end
     end
   end
-
 end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'invoice_item'
 require_relative 'repository_assistant'
 
@@ -5,7 +6,7 @@ class InvoiceItemRepository
   include RepositoryAssistant
 
   def initialize(data_file)
-    @repository = data_file.map {|item| InvoiceItem.new(item)}
+    @repository = data_file.map { |item| InvoiceItem.new(item) }
   end
 
   def find_all_by_item_id(id)
