@@ -89,7 +89,7 @@ class SalesAnalystTest < Minitest::Test
 #-------------------ITERATION TWO--------------------------------------
 
   def test_it_can_group_invoices_by_merchant
-    assert_equal 10, @sa.group_invoices_by_merchant.first[-1].count
+    assert_equal 10, @sa.invoices_by_merchant.first[-1].count
   end
 
   def test_it_can_return_average_invoices_per_merchant
@@ -147,3 +147,6 @@ def test_it_can_find_invoice_by_id
 end
 
 #-------------------------ITERATION FOUR UNIT TESTS--------------------------
+  def test_it_can_calculate_total_revenue_by_date
+    assert_equal 681.75, @sa.total_revenue_by_date(Time.parse('2012-10-07')).to_f
+  end
