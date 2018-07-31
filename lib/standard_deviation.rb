@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module StandardDeviation
 
   def average(info)
@@ -5,25 +6,19 @@ module StandardDeviation
   end
 
   def variance(info)
-    current_average = average(info)
-    info.map {|number| (current_average - number) ** 2}
+    info.map {|number| (average(info) - number) ** 2}
   end
 
   def standard_deviation(info)
-    var = variance(info)
-    Math.sqrt(average(var)).round(2)
+    Math.sqrt(average(variance(info))).round(2)
   end
 
   def two_standard_deviations_above(info)
-    avg = average(info)
-    std_dev = standard_deviation(info) * 2
-    avg + std_dev
+    average(info) + standard_deviation(info) * 2
   end
 
   def two_standard_deviations_below(info)
-    avg = average(info)
-    std_dev = standard_deviation(info) * 2
-    avg - std_dev
+    average(info) - standard_deviation(info) * 2
   end
 
 end

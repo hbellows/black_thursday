@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module RepositoryAssistant
 
   def all
@@ -31,7 +32,7 @@ module RepositoryAssistant
 
   def create_new_id_number
     max_id = @repository.max_by(&:id).id
-    new_id = max_id + 1
+    max_id + 1
   end
 
   def update(id, attributes)

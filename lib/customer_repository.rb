@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require_relative 'customer'
 require_relative 'repository_assistant'
 
@@ -5,7 +6,7 @@ class CustomerRepository
   include RepositoryAssistant
 
   def initialize(data_file)
-    @repository = data_file.map {|item| Customer.new(item)}
+    @repository = data_file.map { |item| Customer.new(item) }
   end
 
   def create(attributes)

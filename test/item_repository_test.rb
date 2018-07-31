@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require './test/test_helper'
 require './lib/item_repository'
 require './lib/file_loader'
@@ -9,29 +10,29 @@ class ItemRepositoryTest < MiniTest::Test
   def setup
   @mock_data = [{
     :id          => 1,
-    :name        => "Pencil",
-    :description => "You can use it to write things",
+    :name        => 'Pencil',
+    :description => 'You can use it to write things',
     :unit_price  => BigDecimal.new(10.99,4),
     :created_at  => Time.now,
     :updated_at  => Time.now,
     :merchant_id => 11111},
     {:id         => 2,
-    :name        => "stationary set",
-    :description => "writing is a lost art!",
+    :name        => 'stationary set',
+    :description => 'writing is a lost art!',
     :unit_price  => BigDecimal.new(99.99,4),
     :created_at  => Time.now,
     :updated_at  => Time.now,
     :merchant_id => 22222},
     {:id         => 3,
-    :name        => "GlitterPens",
-    :description => "Make It Sparkle",
+    :name        => 'GlitterPens',
+    :description => 'Make It Sparkle',
     :unit_price  => BigDecimal.new(5.99, 3),
     :created_at  => Time.now,
     :updated_at  => Time.now,
     :merchant_id => 33333},
     {:id         => 4,
-    :name        => "Ruby Studded Shades",
-    :description => "Life is rosy",
+    :name        => 'Ruby Studded Shades',
+    :description => 'Life is rosy',
     :unit_price  => BigDecimal.new(101.99,5),
     :created_at  => Time.now,
     :updated_at  => Time.now,
@@ -49,8 +50,8 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_can_return_all_items
     # skip
     assert_equal 4, @irepo.all.count
-    assert_equal "stationary set", @irepo.all[1].name
-    assert_equal "Ruby Studded Shades", @irepo.all[3].name
+    assert_equal 'stationary set', @irepo.all[1].name
+    assert_equal 'Ruby Studded Shades', @irepo.all[3].name
   end
 
   def test_it_can_find_item_by_id
@@ -61,13 +62,13 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_it_can_find_item_by_name
     # skip
-    assert_equal @irepo.all[1], @irepo.find_by_name("stationary set")
-    assert_equal @irepo.all[2], @irepo.find_by_name("GlitterPens")
+    assert_equal @irepo.all[1], @irepo.find_by_name('stationary set')
+    assert_equal @irepo.all[2], @irepo.find_by_name('GlitterPens')
   end
 
   def test_it_can_find_an_item_by_description
     # skip
-    search = @irepo.find_all_with_description("Make It Sparkle")
+    search = @irepo.find_all_with_description('Make It Sparkle')
     assert_equal [@irepo.all[2]], search
   end
 
@@ -97,14 +98,14 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_can_create_a_new_item
     new_item = @irepo.create({
     :id         => 6,
-    :name        => "Test",
-    :description => "Test Description",
+    :name        => 'Test',
+    :description => 'Test Description',
     :unit_price  => BigDecimal.new(100.00,5),
     :created_at  => Time.now,
     :updated_at  => Time.now,
     :merchant_id => 55555})
     assert_instance_of Item, new_item[-1]
-    result = "Test"
+    result = 'Test'
     expected = @irepo.all.last.name
     assert_equal expected, result
   end
@@ -112,7 +113,7 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_can_update_an_item
     # skip
     assert_equal 'GlitterPens', @irepo.all[2].name
-    assert_equal "Make It Sparkle", @irepo.all[2].description
+    assert_equal 'Make It Sparkle', @irepo.all[2].description
 
     new_attributes = {:name => 'GLITTERpens', :description => 'So very sparkly', :unit_price => BigDecimal(3.99, 3)}
     @irepo.update(3, new_attributes)
@@ -125,7 +126,7 @@ class ItemRepositoryTest < MiniTest::Test
   def test_it_can_update_an_item_if_only_one_attribute_is_provided
     # skip
     assert_equal 'GlitterPens', @irepo.all[2].name
-    assert_equal "Make It Sparkle", @irepo.all[2].description
+    assert_equal 'Make It Sparkle', @irepo.all[2].description
 
     new_attributes = {:description => 'So very sparkly', :unit_price => BigDecimal(3.99, 3)}
     @irepo.update(3, new_attributes)
