@@ -1,20 +1,8 @@
 # frozen_string_literal: true
 module MerchantAnalytics
 
-  def items_by_merchant
-    @se.items.all.group_by(&:merchant_id)
-  end
-
   def invoices_by_merchant
     @se.invoices.all.group_by(&:merchant_id)
-  end
-
-  def transactions_by_invoice
-    @se.transactions.all.group_by(&:invoice_id)
-  end
-
-  def invoice_items_by_invoice_id
-    @se.invoice_items.all.group_by(&:invoice_id)
   end
   #------------------Iteration 2 Business Intelligence-------------------------
   #ipm = invoices per merchant; not the same as the method invoices_by_merchant
