@@ -154,7 +154,7 @@ class SalesAnalyst
 
   def invoice_status(status)
     find_invoice_status(status)
-   end
+  end
   #-------------------ITERATION THREE------------------------------------
   def find_invoice(invoice_id)
     selected = []
