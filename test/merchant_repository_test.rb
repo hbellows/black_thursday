@@ -3,7 +3,6 @@ require './test/test_helper'
 require './lib/merchant_repository'
 require './lib/file_loader'
 
-
 class MerchantRepositoryTest < Minitest::Test
   include FileLoader
 
