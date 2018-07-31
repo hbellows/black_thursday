@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 require 'bigdecimal'
 require 'bigdecimal/util'
+require_relative 'business_intelligence'
 require_relative 'standard_deviation'
 require_relative 'merchant_analytics'
 
 class SalesAnalyst
+  include BusinessIntelligence
   include StandardDeviation
   include MerchantAnalytics
 
