@@ -218,6 +218,7 @@ class SalesAnalyst
       merchants <<  @se.merchants.find_by_id(id)
       end
     return merchants.compact.uniq
+  end
 
   def merchants_ranked_by_revenue
     find_merchants_ranked_by_revenue
