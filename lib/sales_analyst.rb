@@ -183,11 +183,7 @@ class SalesAnalyst
     transactions.each do |transaction|
       statuses << transaction.result
     end
-    if statuses.include?(:success)
-      true
-    else
-      false
-    end
+    statuses.include?(:success)
   end
 
   def invoice_total(invoice_id)
@@ -208,6 +204,20 @@ class SalesAnalyst
   def top_revenue_earners(top_earners = 20)
     find_top_revenue_earners(top_earners)
   end
+
+
+  def merchants_with_pending_invoices
+    merchant_ids = []
+    @se.invoices.all.each do |invoice|
+      if invoice_paid_in_full?(invoice.id) == false
+        merchant_ids << invoice.merchant_id
+      end
+    end
+    merchants = []
+    merchant_ids.each do |id|
+      merchants <<  @se.merchants.find_by_id(id)
+      end
+    return merchants.compact.uniq
 
   def merchants_ranked_by_revenue
     find_merchants_ranked_by_revenue
