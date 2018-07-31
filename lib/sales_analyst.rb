@@ -205,7 +205,6 @@ class SalesAnalyst
     find_top_revenue_earners(top_earners)
   end
 
-
   def merchants_with_pending_invoices
     merchant_ids = []
     @se.invoices.all.each do |invoice|
