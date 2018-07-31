@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 module MerchantAnalytics
-
-  #--------------------Iteration 4 Merchant Analytics------------------------
-  #ibd = invoice items by date; not the same as the method
-  #invoices_items_by_invoice_date
+  # --------------------Iteration 4 Merchant Analytics------------------------
+  # ibd = invoice items by date; not the same as invoices_items_by_invoice_date
   def find_total_revenue_by_date(date)
     iibd = invoice_items_by_invoice_date(date)
     @se.invoice_items.all.inject(0) do |sum, invoice_item|
@@ -50,8 +48,7 @@ module MerchantAnalytics
       revenue
     end
   end
-
-  #sets key value pair for merchants by revenue hash above
+  # sets key value pair for merchants by revenue hash above
   def invoice_totals_by_merchant(id, invoices, hash)
     hash[id] = invoices.inject(0) do |sum, invoice|
       if invoice_paid_in_full?(invoice.id)
