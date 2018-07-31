@@ -143,7 +143,13 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_calculate_top_revenue_earners
-    # skip
+    skip
     assert_equal [], @sa.top_revenue_earners(10)
+  end
+
+  def test_merchants_with_pending_invoices
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices[-1]
+    assert_equal 4, @sa.merchants_with_pending_invoices.length
   end
 end
