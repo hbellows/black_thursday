@@ -165,7 +165,6 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 12335938, expected[3].id
   end
 
-
   def test_merchants_with_pending_invoices
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[-1]

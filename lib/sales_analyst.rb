@@ -225,10 +225,6 @@ class SalesAnalyst
     find_merchants_ranked_by_revenue
   end
 
-  def revenue_by_merchant(merchant_id)
-    merchants_by_revenue[merchant_id]
-  end
-
   def merchants_with_only_one_item
     result = @se.items.all.group_by do |item|
       item.merchant_id
@@ -261,6 +257,10 @@ class SalesAnalyst
       end
     end
     return one_item_in_month
+  end
+
+  def revenue_by_merchant(merchant_id)
+    merchants_by_revenue[merchant_id]
   end
 
   def most_sold_item_for_merchant(merchant_id)

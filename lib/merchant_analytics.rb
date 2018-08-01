@@ -36,18 +36,13 @@ module MerchantAnalytics
     end.to_h
   end
 
-  def find_merchants_ranked_by_revenue
-    sort_merchants_by_revenue.map do |merchant_id, revenue|
-      @se.merchants.find_by_id(merchant_id)
-    end.reverse.compact
-  end
-
   def merchants_by_revenue
     invoices_by_merchant.each_with_object({}) do |(id, invoices), revenue|
       invoice_totals_by_merchant(id, invoices, revenue)
       revenue
     end
   end
+
   # sets key value pair for merchants by revenue hash above
   def invoice_totals_by_merchant(id, invoices, hash)
     hash[id] = invoices.inject(0) do |sum, invoice|
@@ -56,6 +51,12 @@ module MerchantAnalytics
       else
         sum
       end
+    end
+
+    def find_merchants_ranked_by_revenue
+      sort_merchants_by_revenue.map do |merchant_id, revenue|
+        @se.merchants.find_by_id(merchant_id)
+      end.reverse.compact
     end
   end
 end
