@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module StandardDeviation
 
   def average(info)

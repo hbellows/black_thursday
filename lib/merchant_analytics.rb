@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module MerchantAnalytics
   # --------------------Iteration 4 Merchant Analytics------------------------
   # ibd = invoice items by date; not the same as invoices_items_by_invoice_date
@@ -31,12 +32,12 @@ module MerchantAnalytics
   end
 
   def sort_merchants_by_revenue
-    merchants_by_revenue.sort_by do |merchant_id, revenue|
+    find_merchants_by_revenue.sort_by do |merchant_id, revenue|
       revenue
     end.to_h
   end
 
-  def merchants_by_revenue
+  def find_merchants_by_revenue
     invoices_by_merchant.each_with_object({}) do |(id, invoices), revenue|
       invoice_totals_by_merchant(id, invoices, revenue)
       revenue
@@ -52,11 +53,12 @@ module MerchantAnalytics
         sum
       end
     end
-
-    def find_merchants_ranked_by_revenue
-      sort_merchants_by_revenue.map do |merchant_id, revenue|
-        @se.merchants.find_by_id(merchant_id)
-      end.reverse.compact
-    end
   end
+
+  def rank_merchants_by_revenue
+    sort_merchants_by_revenue.map do |merchant_id, revenue|
+      @se.merchants.find_by_id(merchant_id)
+    end.reverse.compact
+  end
+
 end

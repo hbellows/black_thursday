@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './test/test_helper'
 require './lib/transaction_repository'
 require './lib/file_loader'
@@ -6,34 +7,34 @@ require './lib/file_loader'
 class TransactionRepositoryTest < Minitest::Test
   def setup
     @mock_data = [
-     {:id => 6,
-      :invoice_id => 8,
-      :credit_card_number => '4242424242424242',
-      :credit_card_expiration_date => '0418',
-      :result => 'failed',
-      :created_at => Time.now,
-      :updated_at => Time.now},
-     {:id => 7,
-      :invoice_id => 8,
-      :credit_card_number => '3737373737373737',
-      :credit_card_expiration_date => '0220',
-      :result => :success,
-      :created_at => Time.now,
-      :updated_at => Time.now},
-     {:id => 8,
-      :invoice_id => 9,
-      :credit_card_number => '3737373737373737',
-      :credit_card_expiration_date => '0220',
-      :result => 'success',
-      :created_at => Time.now,
-      :updated_at => Time.now},
-     {:id => 9,
-      :invoice_id => 10,
-      :credit_card_number => '5959595959595959',
-      :credit_card_expiration_date => '1219',
-      :result => 'success',
-      :created_at => Time.now,
-      :updated_at => Time.now}
+     {id:         6,
+      invoice_id: 8,
+      credit_card_number: '4242424242424242',
+      credit_card_expiration_date: '0418',
+      result:     'failed',
+      created_at: Time.now,
+      updated_at: Time.now},
+     {id:         7,
+      invoice_id: 8,
+      credit_card_number: '3737373737373737',
+      credit_card_expiration_date: '0220',
+      result:     'success',
+      created_at: Time.now,
+      updated_at: Time.now},
+     {id:         8,
+      invoice_id: 9,
+      credit_card_number: '3737373737373737',
+      credit_card_expiration_date: '0220',
+      result:     'success',
+      created_at: Time.now,
+      updated_at: Time.now},
+     {id:         9,
+      invoice_id: 10,
+      credit_card_number: '5959595959595959',
+      credit_card_expiration_date: '1219',
+      result:     'success',
+      created_at: Time.now,
+      updated_at: Time.now}
       ]
 
       @transaction_repo = TransactionRepository.new(@mock_data)
@@ -70,12 +71,12 @@ class TransactionRepositoryTest < Minitest::Test
 
   def test_it_can_create_a_new_transaction
     @transaction_repo.create(
-    {:invoice_id => 10,
-     :credit_card_number => '5959595959595959',
-     :credit_card_expiration_date => '1219',
-     :result => 'success',
-     :created_at => Time.now,
-     :updated_at => Time.now}
+    {invoice_id: 10,
+     credit_card_number: '5959595959595959',
+     credit_card_expiration_date: '1219',
+     result: 'success',
+     created_at: Time.now,
+     updated_at: Time.now}
    )
 
    assert_equal 10, @transaction_repo.all[-1].id
@@ -85,9 +86,9 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_can_update_all_transaction_attributes
-    attributes = {:credit_card_number => '121212121212',
-      :credit_card_expiration_date => '1118',
-      :result => 'failed'}
+    attributes = {credit_card_number: '121212121212',
+      credit_card_expiration_date: '1118',
+      result: 'failed'}
     @transaction_repo.update(6, attributes)
 
     assert_equal '121212121212', @transaction_repo.all[0].credit_card_number
@@ -96,7 +97,7 @@ class TransactionRepositoryTest < Minitest::Test
   end
 
   def test_it_can_update_one_transaction_attribute
-    @transaction_repo.update(6, {:result => 'success'})
+    @transaction_repo.update(6, {result: 'success'})
 
     assert_equal '4242424242424242', @transaction_repo.all[0].credit_card_number
     assert_equal '0418', @transaction_repo.all[0].credit_card_expiration_date

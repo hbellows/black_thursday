@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './test/test_helper'
 require './lib/item_repository'
 require './lib/file_loader'
@@ -9,34 +10,34 @@ class ItemRepositoryTest < MiniTest::Test
 
   def setup
   @mock_data = [{
-    :id          => 1,
-    :name        => 'Pencil',
-    :description => 'You can use it to write things',
-    :unit_price  => BigDecimal.new(10.99,4),
-    :created_at  => Time.now,
-    :updated_at  => Time.now,
-    :merchant_id => 11111},
-    {:id         => 2,
-    :name        => 'stationary set',
-    :description => 'writing is a lost art!',
-    :unit_price  => BigDecimal.new(99.99,4),
-    :created_at  => Time.now,
-    :updated_at  => Time.now,
-    :merchant_id => 22222},
-    {:id         => 3,
-    :name        => 'GlitterPens',
-    :description => 'Make It Sparkle',
-    :unit_price  => BigDecimal.new(5.99, 3),
-    :created_at  => Time.now,
-    :updated_at  => Time.now,
-    :merchant_id => 33333},
-    {:id         => 4,
-    :name        => 'Ruby Studded Shades',
-    :description => 'Life is rosy',
-    :unit_price  => BigDecimal.new(101.99,5),
-    :created_at  => Time.now,
-    :updated_at  => Time.now,
-    :merchant_id => 44444}
+    id:          1,
+    name:        'Pencil',
+    description: 'You can use it to write things',
+    unit_price:  BigDecimal.new(10.99,4),
+    created_at:  Time.now,
+    updated_at:  Time.now,
+    merchant_id: 11111},
+    {id:         2,
+    name:        'stationary set',
+    description: 'writing is a lost art!',
+    unit_price:  BigDecimal.new(99.99,4),
+    created_at:  Time.now,
+    updated_at:  Time.now,
+    merchant_id: 22222},
+    {id:         3,
+    name:        'GlitterPens',
+    description: 'Make It Sparkle',
+    unit_price:  BigDecimal.new(5.99, 3),
+    created_at:  Time.now,
+    updated_at:  Time.now,
+    merchant_id: 33333},
+    {id:         4,
+    name:        'Ruby Studded Shades',
+    description: 'Life is rosy',
+    unit_price:  BigDecimal.new(101.99,5),
+    created_at:  Time.now,
+    updated_at:  Time.now,
+    merchant_id: 44444}
     ]
 
     @irepo = ItemRepository.new(@mock_data)
@@ -97,13 +98,13 @@ class ItemRepositoryTest < MiniTest::Test
 
   def test_it_can_create_a_new_item
     new_item = @irepo.create({
-    :id         => 6,
-    :name        => 'Test',
-    :description => 'Test Description',
-    :unit_price  => BigDecimal.new(100.00,5),
-    :created_at  => Time.now,
-    :updated_at  => Time.now,
-    :merchant_id => 55555})
+    id:         6,
+    name:        'Test',
+    description: 'Test Description',
+    unit_price:  BigDecimal.new(100.00,5),
+    created_at:  Time.now,
+    updated_at:  Time.now,
+    merchant_id: 55555})
     assert_instance_of Item, new_item[-1]
     result = 'Test'
     expected = @irepo.all.last.name
@@ -115,7 +116,7 @@ class ItemRepositoryTest < MiniTest::Test
     assert_equal 'GlitterPens', @irepo.all[2].name
     assert_equal 'Make It Sparkle', @irepo.all[2].description
 
-    new_attributes = {:name => 'GLITTERpens', :description => 'So very sparkly', :unit_price => BigDecimal(3.99, 3)}
+    new_attributes = {name: 'GLITTERpens', description: 'So very sparkly', unit_price: BigDecimal(3.99, 3)}
     @irepo.update(3, new_attributes)
 
     assert_equal 'GLITTERpens', @irepo.all[2].name
@@ -128,7 +129,7 @@ class ItemRepositoryTest < MiniTest::Test
     assert_equal 'GlitterPens', @irepo.all[2].name
     assert_equal 'Make It Sparkle', @irepo.all[2].description
 
-    new_attributes = {:description => 'So very sparkly', :unit_price => BigDecimal(3.99, 3)}
+    new_attributes = {description: 'So very sparkly', unit_price: BigDecimal(3.99, 3)}
     @irepo.update(3, new_attributes)
 
     assert_equal 'GlitterPens', @irepo.all[2].name

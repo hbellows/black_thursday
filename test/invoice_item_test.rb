@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './test/test_helper'
 require './lib/invoice_item'
 require 'bigdecimal'
@@ -7,13 +8,13 @@ class InvoiceItemTest < Minitest::Test
 
   def setup
     @invoice_item = InvoiceItem.new({
-      :id         => 6,
-      :item_id    => 7,
-      :invoice_id => 8,
-      :quantity   => 1,
-      :unit_price => BigDecimal.new(5.99, 3),
-      :created_at => Time.now,
-      :updated_at => Time.now
+      id:         6,
+      item_id:    7,
+      invoice_id: 8,
+      quantity:   1,
+      unit_price: BigDecimal.new(5.99, 3),
+      created_at: Time.now,
+      updated_at: Time.now
     })
   end
 

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'item'
 require_relative 'repository_assistant'
 

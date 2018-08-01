@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'invoice_item'
 require_relative 'repository_assistant'
 
