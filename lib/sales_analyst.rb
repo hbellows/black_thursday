@@ -313,7 +313,6 @@ class SalesAnalyst
     grouped = invoice_items_paid_in_full.flatten.group_by do |invoice_item|
       invoice_item.item_id
       end
-
     grouped.map do |item_id, invoice_item|
       grouped[item_id] = (invoice_item[0].quantity.to_f * (invoice_item[0].unit_price.to_f.round(2))).round(2)
       end
