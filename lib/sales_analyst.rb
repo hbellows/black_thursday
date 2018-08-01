@@ -261,7 +261,7 @@ class SalesAnalyst
   end
 
   def revenue_by_merchant(merchant_id)
-    merchants_by_revenue[merchant_id]
+    find_merchants_by_revenue[merchant_id]
   end
 
   def most_sold_item_for_merchant(merchant_id)
@@ -331,7 +331,6 @@ class SalesAnalyst
       items << @se.items.find_by_id(id)
       end
       return items.compact.flatten.shift
-  end
 
     grouped.map do |item_id, invoice_item|
       grouped[item_id] = (invoice_item[0].quantity.to_f * (invoice_item[0].unit_price.to_f.round(2))).round(2)
