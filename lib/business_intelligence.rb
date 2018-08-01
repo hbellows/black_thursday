@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 module BusinessIntelligence
   # ------------------Iteration 2 Business Intelligence-----------------------
-  # ipm = invoices per merchant; not the same as invoices_by_merchant
   def invoices_by_merchant
     @se.invoices.all.group_by(&:merchant_id)
   end
 
+  # ipm = invoices per merchant; not the same as invoices_by_merchant
   def invoices_per_merchant
     ipm = invoices_by_merchant
     ipm.inject(ipm) do |hash, (merchant_id, invoices)|
