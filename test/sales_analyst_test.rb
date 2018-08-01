@@ -188,4 +188,9 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Item, @sa.most_sold_item_for_merchant(12334105)[0]
   end
 
+  def test_best_item_for_merchant
+    assert_instance_of Item, @sa.best_item_for_merchant(12335938)
+    assert_equal 1, @sa.best_item_for_merchant(12335938)
+  end
+
 end
