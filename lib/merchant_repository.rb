@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'merchant'
 require_relative 'repository_assistant'
 require 'time'

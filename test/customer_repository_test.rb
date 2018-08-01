@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './test/test_helper'
 require './lib/customer_repository'
 require './lib/file_loader'
@@ -7,26 +8,26 @@ class CustomerRepositoryTest < Minitest::Test
 
   def setup
     @mock_data = [
-      {:id => 1,
-      :first_name => 'Joan',
-      :last_name => 'Clarke',
-      :created_at => Time.now,
-      :updated_at => Time.now},
-      {:id => 2,
-      :first_name => 'Jimmy',
-      :last_name => 'John',
-      :created_at => Time.now,
-      :updated_at => Time.now},
-      {:id => 3,
-      :first_name => 'Jessica',
-      :last_name => 'Jones',
-      :created_at => Time.now,
-      :updated_at => Time.now},
-      {:id => 4,
-      :first_name => 'James Earl',
-      :last_name => 'Jones',
-      :created_at => Time.now,
-      :updated_at => Time.now}
+      {id:        1,
+      first_name: 'Joan',
+      last_name:  'Clarke',
+      created_at: Time.now,
+      updated_at: Time.now},
+      {id:        2,
+      first_name: 'Jimmy',
+      last_name:  'John',
+      created_at: Time.now,
+      updated_at: Time.now},
+      {id:        3,
+      first_name: 'Jessica',
+      last_name:  'Jones',
+      created_at: Time.now,
+      updated_at: Time.now},
+      {id: 4,
+      first_name: 'James Earl',
+      last_name:  'Jones',
+      created_at: Time.now,
+      updated_at: Time.now}
       ]
 
     @customer_repo = CustomerRepository.new(@mock_data)
@@ -59,10 +60,10 @@ class CustomerRepositoryTest < Minitest::Test
 
   def test_it_can_create_a_new_customer
     @customer_repo.create({
-      :first_name => 'Jane',
-      :last_name => 'Smith',
-      :created_at => Time.now,
-      :updated_at => Time.now
+      first_name: 'Jane',
+      last_name:  'Smith',
+      created_at: Time.now,
+      updated_at: Time.now
       })
 
     assert_equal 5, @customer_repo.all[-1].id
@@ -71,14 +72,14 @@ class CustomerRepositoryTest < Minitest::Test
   end
 
   def test_it_can_update_customer_attributes
-    @customer_repo.update(2, {:first_name => 'James', :last_name => 'Joyce'} )
+    @customer_repo.update(2, {first_name: 'James', last_name: 'Joyce'} )
 
     assert_equal 'James', @customer_repo.all[1].first_name
     assert_equal 'Joyce', @customer_repo.all[1].last_name
   end
 
   def test_it_can_update_one_customer_attribute
-    @customer_repo.update(2, :last_name => 'Dean')
+    @customer_repo.update(2, last_name: 'Dean')
 
     assert_equal 'Jimmy', @customer_repo.all[1].first_name
     assert_equal 'Dean', @customer_repo.all[1].last_name

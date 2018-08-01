@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require './test/test_helper'
 require './lib/customer'
 
@@ -6,11 +7,11 @@ class CustomerTest < Minitest::Test
 
   def setup
     @customer = Customer.new({
-      :id => 6,
-      :first_name => 'Joan',
-      :last_name => 'Clarke',
-      :created_at => Time.now,
-      :updated_at => Time.now
+      id:          6,
+      first_name: 'Joan',
+      last_name:  'Clarke',
+      created_at: Time.now,
+      updated_at: Time.now
       })
   end
 
