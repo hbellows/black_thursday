@@ -192,5 +192,5 @@ class SalesAnalystTest < Minitest::Test
     assert_instance_of Item, @sa.best_item_for_merchant(12335938)
     assert_equal 1, @sa.best_item_for_merchant(12335938)
   end
-  
+
 end

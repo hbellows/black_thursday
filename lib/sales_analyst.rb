@@ -313,6 +313,7 @@ class SalesAnalyst
     grouped = invoice_items_paid_in_full.flatten.group_by do |invoice_item|
       invoice_item.item_id
       end
+
     grouped.map do |item_id, invoice_item|
       grouped[item_id] = (invoice_item[0].quantity.to_f * (invoice_item[0].unit_price.to_f.round(2))).round(2)
       end
@@ -331,5 +332,24 @@ class SalesAnalyst
       end
       return items.compact.flatten.shift
   end
+
+    grouped.map do |item_id, invoice_item|
+      grouped[item_id] = (invoice_item[0].quantity.to_f * (invoice_item[0].unit_price.to_f.round(2))).round(2)
+    end
+    top_value = grouped.max_by do |item_id, invoice_value|
+      invoice_value
+    end
+    item_ids = []
+    top_value.each do |value|
+      if value > 1000000
+        item_ids << value
+       end
+     end
+    items = []
+    item_ids.each do |id|
+      items << @se.items.find_by_id(id)
+    end
+     return items.compact.flatten.shift
+    end
 
 end
