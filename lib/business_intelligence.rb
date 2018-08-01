@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module BusinessIntelligence
   # ------------------Iteration 2 Business Intelligence-----------------------
   def invoices_by_merchant

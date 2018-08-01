@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'bigdecimal'
 require 'bigdecimal/util'
 require_relative 'business_intelligence'
@@ -222,7 +223,7 @@ class SalesAnalyst
   end
 
   def merchants_ranked_by_revenue
-    find_merchants_ranked_by_revenue
+    rank_merchants_by_revenue
   end
 
   def merchants_with_only_one_item

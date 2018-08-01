@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rake/testtask'
 
 Rake::TestTask.new do |t|
@@ -27,5 +28,5 @@ namespace :sanitation do
   end
 
   desc 'Check both line length and method length'
-  task :all => [:lines, :methods]
+  task all: [:lines, :methods]
 end
