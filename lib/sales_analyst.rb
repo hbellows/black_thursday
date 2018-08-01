@@ -262,7 +262,7 @@ class SalesAnalyst
     return one_item_in_month
   end
 
-  def most_sold_item_for_merchant(merchant_id)
+  def grab_all_successful_invoices_for_merchant(merchant_id)
     invoices_for_id = @se.invoices.all.find_all do |invoice|
       invoice.merchant_id == merchant_id
       end
@@ -272,6 +272,11 @@ class SalesAnalyst
         successful_invoices << invoice
         end
       end
+      return successful_invoices
+    end
+
+  def most_sold_item_for_merchant(merchant_id)
+    successful_invoices = grab_all_successful_invoices_for_merchant(merchant_id)
     invoice_items = successful_invoices.map do |invoice|
       @se.invoice_items.find_all_by_invoice_id(invoice.id)
       end.flatten
