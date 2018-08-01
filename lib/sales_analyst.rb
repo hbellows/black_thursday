@@ -274,31 +274,31 @@ class SalesAnalyst
         successful_invoices << invoice
         end
       end
-     invoice_items = successful_invoices.map do |invoice|
-       @se.invoice_items.find_all_by_invoice_id(invoice.id)
-     end.flatten
-     quantities_by_item_id = Hash.new(0)
-     invoice_items.map do |invoice_item|
+    invoice_items = successful_invoices.map do |invoice|
+      @se.invoice_items.find_all_by_invoice_id(invoice.id)
+      end.flatten
+    quantities_by_item_id = Hash.new(0)
+    invoice_items.map do |invoice_item|
       quantities_by_item_id[invoice_item.item_id] += invoice_item.quantity
     end
-     max = quantities_by_item_id.max_by do |item_id, quantity|
-       quantity
+    max = quantities_by_item_id.max_by do |item_id, quantity|
+      quantity
      end
-     max_quantity = max[1]
-     ids_and_max_value = quantities_by_item_id.find_all do |id, quantity|
+    max_quantity = max[1]
+    ids_and_max_value = quantities_by_item_id.find_all do |id, quantity|
        quantity == max_quantity
      end.flatten
-     ids = ids_and_max_value.map.with_index do |num, index|
-       if num.to_s.length > 8
-         ids_and_max_value.delete_at(index)
-       end
-     end
+    ids = ids_and_max_value.map.with_index do |num, index|
+      if num.to_s.length > 8
+        ids_and_max_value.delete_at(index)
+      end
+    end
      items = []
      ids.each do |id|
       items << @se.items.find_by_id(id)
      end
      return items.compact
-   end
+  end
 
    def best_item_for_merchant(merchant_id)
      grouped = @se.invoices.all.find_all do |invoice|
