@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 require 'bigdecimal'
 require 'bigdecimal/util'
+require_relative 'business_intelligence'
 require_relative 'standard_deviation'
 require_relative 'merchant_analytics'
 
 class SalesAnalyst
+  include BusinessIntelligence
   include StandardDeviation
   include MerchantAnalytics
 
@@ -46,12 +48,12 @@ class SalesAnalyst
   end
 
   def select_merchant_ids_over_standard_deviation
-  mean = average_items_per_merchant
-  grouped = group_items_by_merchant
-  selected_ids = []
-  grouped.each do |key, value|
-    if value.length > average_items_per_merchant_standard_deviation + mean
-      selected_ids << key
+    mean = average_items_per_merchant
+    grouped = group_items_by_merchant
+    selected_ids = []
+    grouped.each do |key, value|
+      if value.length > average_items_per_merchant_standard_deviation + mean
+        selected_ids << key
       end
     end
     return selected_ids
@@ -131,7 +133,7 @@ class SalesAnalyst
     end
     return golden_items
   end
-  #----------------ITERATION TWO---------------------------------
+  # ----------------ITERATION TWO---------------------------------
   def average_invoices_per_merchant
     (@se.invoices.all.count / @se.merchants.all.count.to_f).round(2)
   end
@@ -155,7 +157,7 @@ class SalesAnalyst
   def invoice_status(status)
     find_invoice_status(status)
   end
-  #-------------------ITERATION THREE------------------------------------
+  # -------------------ITERATION THREE------------------------------------
   def find_invoice(invoice_id)
     selected = []
     @se.invoices.all.each do |invoice|
@@ -196,7 +198,7 @@ class SalesAnalyst
    end
    BigDecimal(sum, 7)
  end
- #----------------------ITERATION FOUR----------------------------------
+ # ----------------------ITERATION FOUR----------------------------------
   def total_revenue_by_date(date)
     find_total_revenue_by_date(date)
   end
@@ -204,7 +206,6 @@ class SalesAnalyst
   def top_revenue_earners(top_earners = 20)
     find_top_revenue_earners(top_earners)
   end
-
 
   def merchants_with_pending_invoices
     merchant_ids = []

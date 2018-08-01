@@ -21,7 +21,7 @@ class SalesAnalystTest < Minitest::Test
   def test_it_exists
     assert_instance_of SalesAnalyst, @sa
   end
-  #-----------------------ITERATION ONE UNIT TESTS--------------------------
+  # -----------------------ITERATION ONE UNIT TESTS--------------------------
   def test_it_can_create_an_instance_of_sales_engine
     assert_instance_of SalesEngine, @sa.se
   end
@@ -66,7 +66,6 @@ class SalesAnalystTest < Minitest::Test
   end
 
   def test_it_can_find_average_average_price_per_merchant
-    # assert_instance_of BigDecimal, @sa.average_average_price_per_merchant
     assert_equal 167.35, @sa.average_average_price_per_merchant.to_f
   end
 
@@ -82,7 +81,7 @@ class SalesAnalystTest < Minitest::Test
   def test_it_can_find_golden_items
     assert_equal 1, @sa.golden_items.length
   end
-  #-------------------ITERATION TWO-----------------------------------
+  # -------------------ITERATION TWO-----------------------------------
   def test_it_can_group_invoices_by_merchant
     assert_equal 10, @sa.invoices_by_merchant.first[-1].count
   end
@@ -124,7 +123,7 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 54.05, @sa.invoice_status(:shipped)
     assert_equal 16.22, @sa.invoice_status(:returned)
   end
-  #-------------------------ITERATION THREE UNIT TESTS----------------------
+  # -------------------------ITERATION THREE UNIT TESTS----------------------
   def test_it_can_find_invoice_by_id
     assert_instance_of Invoice, @sa.find_invoice(1)[0]
     assert_equal 12335938, @sa.find_invoice(1)[0].merchant_id
@@ -138,15 +137,12 @@ class SalesAnalystTest < Minitest::Test
   def test_invoice_total
     assert_equal 0.2106777E5, @sa.invoice_total(1)
   end
-  #-------------------------ITERATION FOUR UNIT TESTS------------------------
+  # -------------------------ITERATION FOUR UNIT TESTS----------------------
   def test_it_can_calculate_total_revenue_by_date
     assert_equal 21067.77, @sa.total_revenue_by_date(Time.parse('2009-02-07')).to_f
   end
 
   def test_it_can_calculate_top_revenue_earners
-    skip
-    assert_equal [], @sa.top_revenue_earners(10)
-
     expected = @sa.top_revenue_earners
     assert_equal 4, expected.count
     assert_equal 12334113, expected[0].id
@@ -156,12 +152,19 @@ class SalesAnalystTest < Minitest::Test
     assert_equal 87036.01, @sa.revenue_by_merchant(12334113).to_f
   end
 
+  def test_merchants_with_pending_invoices
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
+    assert_instance_of Merchant, @sa.merchants_with_pending_invoices[-1]
+    assert_equal 4, @sa.merchants_with_pending_invoices.length
+  end
+
   def test_it_can_rank_merchants_by_revenue
     expected = @sa.merchants_ranked_by_revenue
     assert_equal 4, expected.count
     assert_equal 12334113, expected[0].id
     assert_equal 12335938, expected[3].id
   end
+
 
   def test_merchants_with_pending_invoices
     assert_instance_of Merchant, @sa.merchants_with_pending_invoices[0]
@@ -184,6 +187,5 @@ class SalesAnalystTest < Minitest::Test
   def test_most_sold_item_for_merchant
     assert_instance_of Item, @sa.most_sold_item_for_merchant(12334105)[0]
   end
-
 
 end
