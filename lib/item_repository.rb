@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require_relative 'item'
 require_relative 'repository_assistant'
 
@@ -39,6 +40,6 @@ class ItemRepository
   end
 
   def inspect
-  "#<#{self.class} #{@items.size} rows>"
+    "#<#{self.class} #{@items.size} rows>"
   end
 end

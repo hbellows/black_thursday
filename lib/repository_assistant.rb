@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module RepositoryAssistant
 
   def all
@@ -38,12 +39,6 @@ module RepositoryAssistant
   def update(id, attributes)
     repo_object = find_by_id(id)
     return if repo_object.nil?
-    # update_method(repo_object, attributes)
-      #attributes.each do |k,v|
-        #unless k.nil?
-          # attributes[k] = v
-        # end
-      #end
     repo_object.name = attributes[:name] unless attributes[:name].nil?
     repo_object.description = attributes[:description] unless attributes[:description].nil?
     repo_object.unit_price = attributes[:unit_price] unless attributes[:unit_price].nil?
