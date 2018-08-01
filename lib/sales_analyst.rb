@@ -228,4 +228,75 @@ class SalesAnalyst
   def revenue_by_merchant(merchant_id)
     merchants_by_revenue[merchant_id]
   end
+
+  def merchants_with_only_one_item
+    result = @se.items.all.group_by do |item|
+      item.merchant_id
+    end
+    merchant_ids = []
+    result.each do |key, value|
+      if value.length == 1
+        merchant_ids << key
+      end
+    end
+    merchants = []
+    merchant_ids.each do |merchant_id|
+      merchants << @se.merchants.find_by_id(merchant_id)
+    end
+    return merchants.compact
+  end
+
+  def merchants_with_only_one_item_registered_in_month(month)
+    invoices_by_month = @se.invoices.all.group_by do |invoice|
+      invoice.created_at.strftime('%B')
+    end
+    merchants_by_month = @se.merchants.all.group_by do |merchant|
+      merchant.created_at.strftime('%B')
+    end
+    merchants_in_specified_month = merchants_by_month[month]
+    one_item_in_month = []
+    merchants_with_only_one_item.each do |merchant|
+      if merchants_in_specified_month.include?(merchant)
+        one_item_in_month << merchant
+      end
+    end
+    return one_item_in_month
+  end
+
+  def most_sold_item_for_merchant(merchant_id)
+    invoices_for_id = @se.invoices.all.find_all do |invoice|
+      invoice.merchant_id == merchant_id
+      end
+    successful_invoices = []
+    invoices_for_id.each do |invoice|
+      if invoice_paid_in_full?(invoice.id)
+        successful_invoices << invoice
+        end
+      end
+     invoice_items = successful_invoices.map do |invoice|
+       @se.invoice_items.find_all_by_invoice_id(invoice.id)
+     end.flatten
+     quantities_by_item_id = Hash.new(0)
+     invoice_items.map do |invoice_item|
+      quantities_by_item_id[invoice_item.item_id] += invoice_item.quantity
+    end
+     max = quantities_by_item_id.max_by do |item_id, quantity|
+       quantity
+     end
+     max_quantity = max[1]
+     ids_and_max_value = quantities_by_item_id.find_all do |id, quantity|
+       quantity == max_quantity
+     end.flatten
+     ids = ids_and_max_value.map.with_index do |num, index|
+       if num.to_s.length > 8
+         ids_and_max_value.delete_at(index)
+       end
+     end
+     items = []
+     ids.each do |id|
+      items << @se.items.find_by_id(id)
+     end
+     return items.compact
+   end
+
 end
